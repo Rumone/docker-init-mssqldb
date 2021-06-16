@@ -1,0 +1,1 @@
+/opt/mssql/bin/sqlservr.sh & /usr/src/database/import-data.sh
