@@ -1,0 +1,42 @@
+CREATE DATABASE EmployeeServerRequest;
+
+USE EmployeeServerRequest;
+
+CREATE TABLE Employee
+(
+    Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    TeamId INT NOT NULL,
+
+    CONSTRAINT FK_Employee_Team FOREIGN KEY (TeamId) REFERENCES Team (Id),
+);
+
+CREATE TABLE Team
+(
+    Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    TeamName VARCHAR(64) NOT NULL,
+);
+
+CREATE TABLE ServerOS
+(
+    Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    OsName VARCHAR(64),
+    OsVersion VARCHAR(64),
+);
+
+CREATE TABLE Request
+(
+    Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    ServerOS VARCHAR(64) NOT NULL,
+    MemorySpace FLOAT NOT NULL,
+    HddSpace FLOAT NOT NULL,
+    Reason VARCHAR(128) NOT NULL,
+    EmployeeId INT NOT NULL,
+    ServerOsId INT NOT NULL,
+    CreatedAt DATETIME NOT NULL, 
+    UpdatedAt DATETIME NOT NULL,
+    DeletedAt DATETIME NOT NULL,
+
+    CONSTRAINT FK_Request_Employee FOREIGN KEY (EmployeeId) REFERENCES Employee(Id),
+);
